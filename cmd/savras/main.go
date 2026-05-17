@@ -9,11 +9,11 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/magichuihui/savras/internal/auth"
-	"github.com/magichuihui/savras/internal/config"
-	"github.com/magichuihui/savras/internal/grafana"
-	"github.com/magichuihui/savras/internal/proxy"
-	"github.com/magichuihui/savras/internal/sync"
+	"github.com/amyinfo/savras/internal/auth"
+	"github.com/amyinfo/savras/internal/config"
+	"github.com/amyinfo/savras/internal/grafana"
+	"github.com/amyinfo/savras/internal/proxy"
+	"github.com/amyinfo/savras/internal/sync"
 )
 
 func main() {

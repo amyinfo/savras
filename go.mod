@@ -1,4 +1,4 @@
-module github.com/magichuihui/savras
+module github.com/amyinfo/savras
 
 go 1.25.3
 

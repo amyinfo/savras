@@ -15,8 +15,8 @@ import (
 
 	"log/slog"
 
-	"github.com/magichuihui/savras/internal/auth"
-	"github.com/magichuihui/savras/internal/config"
+	"github.com/amyinfo/savras/internal/auth"
+	"github.com/amyinfo/savras/internal/config"
 )
 
 //go:embed g8_login_dark.svg

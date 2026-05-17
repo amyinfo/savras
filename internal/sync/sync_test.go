@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	cfg "github.com/magichuihui/savras/internal/config"
-	grafana "github.com/magichuihui/savras/internal/grafana"
+	cfg "github.com/amyinfo/savras/internal/config"
+	grafana "github.com/amyinfo/savras/internal/grafana"
 )
 
 type mockGrafanaClient struct {
