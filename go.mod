@@ -1,4 +1,4 @@
-module savras
+module github.com/magichuihui/savras
 
 go 1.25.3
 

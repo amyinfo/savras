@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"savras/internal/config"
+	"github.com/magichuihui/savras/internal/config"
 )
 
 func TestInit(t *testing.T) {

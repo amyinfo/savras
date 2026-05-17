@@ -7,9 +7,9 @@ import (
 	"strings"
 	"testing"
 
-	"savras/internal/auth"
+	"github.com/magichuihui/savras/internal/auth"
 
-	httpconfig "savras/internal/config"
+	httpconfig "github.com/magichuihui/savras/internal/config"
 )
 
 func TestSetGrafanaMonitor(t *testing.T) {

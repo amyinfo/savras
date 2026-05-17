@@ -11,7 +11,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	cfg "savras/internal/config"
+	cfg "github.com/magichuihui/savras/internal/config"
 
 	"github.com/go-ldap/ldap/v3"
 	"github.com/golang-jwt/jwt/v5"

@@ -7,8 +7,8 @@ import (
 	"time"
 
 	"log/slog"
-	grafConfig "savras/internal/config"
-	grafana "savras/internal/grafana"
+	grafConfig "github.com/magichuihui/savras/internal/config"
+	grafana "github.com/magichuihui/savras/internal/grafana"
 
 	ldap "github.com/go-ldap/ldap/v3"
 )
