@@ -308,18 +308,16 @@ body{
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  background:#000;
+  background:rgb(17,18,23);
 }
 body::before{
   content:"";
   position:fixed;
   top:0;left:0;right:0;bottom:0;
   background:
-    radial-gradient(ellipse 200% 50% at 50% -20%,rgba(67,84,230,0.18) 0%,transparent 60%),
-    radial-gradient(ellipse 120% 80% at 70% -20%,rgba(248,151,151,0.10) 0%,rgba(214,118,230,0.04) 50%,transparent 70%),
-    radial-gradient(ellipse 120% 100% at 20% -40%,rgba(255,138,54,0.14) 0%,rgba(251,90,103,0.06) 40%,transparent 70%),
-    radial-gradient(ellipse 60% 60% at 25% -30%,rgba(255,138,54,0.10) 0%,transparent 60%),
-    radial-gradient(ellipse 60% 30% at 25% -20%,rgba(251,197,90,0.06) 0%,transparent 60%);
+    radial-gradient(ellipse 200% 50% at 50% -20%,rgba(67,84,230,0.20) 0%,transparent 60%),
+    radial-gradient(ellipse 100% 60% at 70% -20%,rgba(248,151,151,0.08) 0%,transparent 60%),
+    radial-gradient(ellipse 100% 60% at 30% -20%,rgba(255,138,54,0.08) 0%,transparent 60%);
   pointer-events:none;
 }
 .login-wrap{
