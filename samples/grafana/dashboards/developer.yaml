@@ -140,7 +140,5 @@ data:
       },
       "timepicker": {},
       "timezone": "browser",
-      "title": "New dashboard",
-      "uid": "adcbpmf",
-      "version": 2
+      "title": "devops dashboard"
     }
