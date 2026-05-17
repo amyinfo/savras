@@ -2,6 +2,7 @@ package proxy
 
 import (
 	"context"
+	_ "embed"
 	"encoding/json"
 	"html/template"
 	"net"
@@ -17,6 +18,12 @@ import (
 	"savras/internal/auth"
 	"savras/internal/config"
 )
+
+//go:embed g8_login_dark.svg
+var loginBgSVG []byte
+
+//go:embed favicon.png
+var faviconPNG []byte
 
 // context key for carrying JWT claims across middleware
 type contextKey string
@@ -90,6 +97,18 @@ func NewProxyHandler(cfg *config.Config) http.Handler {
 	mux.HandleFunc("/-/savras/sync/trigger", syncTriggerHandler(cfg))
 	mux.HandleFunc("/login", loginHandler(cfg))
 	mux.HandleFunc("/-/savras/logout", logoutHandler(cfg))
+	mux.HandleFunc("/-/savras/static/g8_login_dark.svg", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "image/svg+xml")
+		w.Header().Set("Cache-Control", "public, max-age=86400")
+		w.WriteHeader(http.StatusOK)
+		w.Write(loginBgSVG)
+	})
+	mux.HandleFunc("/favicon.ico", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "image/png")
+		w.Header().Set("Cache-Control", "public, max-age=86400")
+		w.WriteHeader(http.StatusOK)
+		w.Write(faviconPNG)
+	})
 	// Intercept Grafana logout paths to clear Savras cookie
 	mux.HandleFunc("/logout", grafanaLogoutHandler(cfg))
 	mux.HandleFunc("/api/auth/logout", grafanaLogoutHandler(cfg))
@@ -294,6 +313,7 @@ const loginHTML = `<!DOCTYPE html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
 <title>Grafana</title>
+<link rel="icon" type="image/png" href="/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -308,17 +328,19 @@ body{
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  background:rgb(17,18,23);
+  background:#000;
 }
 body::before{
   content:"";
   position:fixed;
   top:0;left:0;right:0;bottom:0;
-  background:
-    radial-gradient(ellipse 200% 50% at 50% -20%,rgba(67,84,230,0.20) 0%,transparent 60%),
-    radial-gradient(ellipse 100% 60% at 70% -20%,rgba(248,151,151,0.08) 0%,transparent 60%),
-    radial-gradient(ellipse 100% 60% at 30% -20%,rgba(255,138,54,0.08) 0%,transparent 60%);
+  background:url(/-/savras/static/g8_login_dark.svg) center top / auto no-repeat;
   pointer-events:none;
+  animation:bg-fade-in 1.2s ease-out .3s both;
+}
+@keyframes bg-fade-in{
+  0%{opacity:0}
+  100%{opacity:1}
 }
 .login-wrap{
   width:100%;
@@ -326,6 +348,10 @@ body::before{
   width:calc(100% - 2rem);
   position:relative;
   z-index:1;
+}
+@keyframes login-fade-in{
+  0%{opacity:0}
+  100%{opacity:1}
 }
 .login-card{
   background:rgba(24,27,31,0.7);
@@ -336,6 +362,7 @@ body::before{
   align-items:center;
   min-height:320px;
   justify-content:center;
+  animation:login-fade-in .9s ease-out .2s both;
 }
 .login-logo{
   display:flex;

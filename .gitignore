@@ -42,3 +42,5 @@ config.yaml
 #.github/
 
 config.yaml
+
+.playwright-mcp/

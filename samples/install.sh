@@ -56,6 +56,11 @@ echo "==> Creating Savras ConfigMap..."
 kubectl apply -f "${SCRIPT_DIR}/grafana/configmap.yaml"
 echo ""
 
+# ---- Dashboards ConfigMap ----
+echo "==> Create dashboards for testing..."
+kubectl apply -f "${SCRIPT_DIR}/grafana/dashboards"
+echo ""
+
 # ---- Grafana repo ----
 echo "==> Adding Grafana Helm repo..."
 helm repo add grafana https://grafana.github.io/helm-charts --force-update
