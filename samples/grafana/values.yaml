@@ -58,7 +58,8 @@ initChownData:
       drop:
         - ALL
 
-# -- Post-start: give Savras time to boot, then trigger an initial sync
+# -- Post-start: wait for Savras sidecar, then trigger an initial sync.
+# Retries with backoff so a slow sidecar doesn't trigger PostStartHookError.
 lifecycleHooks:
   postStart:
     exec:
@@ -66,8 +67,16 @@ lifecycleHooks:
         - /bin/sh
         - -c
         - |
-          sleep 120 &&
-          curl -s -XPOST http://127.0.0.1:4181/-/savras/sync/trigger
+          sleep 30
+          for i in 1 2 3 4 5; do
+            if curl -sf -XPOST http://127.0.0.1:4181/-/savras/sync/trigger; then
+              echo "sync: initial sync triggered"
+              exit 0
+            fi
+            echo "sync: sidecar not ready (attempt $i/5), waiting 15s..."
+            sleep 15
+          done
+          echo "sync: warning — initial sync trigger failed, will retry on schedule" >&2
 
 extraVolumes:
   - name: savras-config
